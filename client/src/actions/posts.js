@@ -32,8 +32,12 @@ export const createPostAction = (post) => async(dispatch) => {
 export const updatePostAction = (id , post ) => async (dispatch) => {
     try {
 
-        const {data} = await updatePost(id , post)
+        const {data} = updatePost(id , post)
+        //console.log(data)
         dispatch({type : 'UPDATE' , payload: data})
+        const response = await fetchPosts()
+        //console.log(response)
+        dispatch({type : 'FETCH_ALL' , payload : response.data})
         
     } catch (error) {
         console.log(error)

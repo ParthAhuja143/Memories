@@ -17,14 +17,16 @@ const Form = ({setCurrentID , currentID}) => {
 
        if(currentID){
        dispatch(updatePostAction(currentID , postData))
+       //console.log('FORM' , currentID ,postData )
        clear()
        }
        else{
-       console.log('form dispatch done' , postData)
+       //console.log('form dispatch done' , postData)
        dispatch(createPostAction(postData))
        clear()
+       setTimeout(() => {window.location.reload()} , 1000)
     }
-    setTimeout(() => {window.location.reload()} , 1000)
+    
 
 }
 
