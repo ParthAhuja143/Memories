@@ -1,7 +1,8 @@
-export default (posts = [] , action) => {
+ const reducer = (posts = [] , action) => {
     switch(action.type){
 
         case 'FETCH_ALL' :
+            //console.log('FETCH DONE')
             return action.payload
         
         case 'CREATE' :
@@ -16,3 +17,5 @@ export default (posts = [] , action) => {
             return posts    
     }
 }
+
+export default reducer

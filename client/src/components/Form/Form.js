@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import useStyles from './styles.js'
 import FileBase from 'react-file-base64'
 import { useDispatch, useSelector } from 'react-redux'
-import { createPost, updatePost } from '../../actions/posts.js'
+import { createPostAction, updatePostAction } from '../../actions/posts.js'
 
 const Form = ({setCurrentID , currentID}) => {
 
@@ -16,14 +16,16 @@ const Form = ({setCurrentID , currentID}) => {
        event.preventDefault()
 
        if(currentID){
-       dispatch(updatePost(currentID , postData))
+       dispatch(updatePostAction(currentID , postData))
        clear()
        }
        else{
-       dispatch(createPost(postData))
+       console.log('form dispatch done' , postData)
+       dispatch(createPostAction(postData))
        clear()
     }
-window.location.reload()
+    setTimeout(() => {window.location.reload()} , 1000)
+
 }
 
     const clear = () => {

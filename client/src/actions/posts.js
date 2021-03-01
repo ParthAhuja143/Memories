@@ -1,34 +1,38 @@
-import * as api from '../api/index.js'
+
+import {fetchPosts  , updatePost , deletePost, createPost}  from '../api/index.js'
 
 //Action Creators
 
-export const getPosts = () => async (dispatch) => {
+export const getPostsAction = () => async (dispatch) => {
     try {
         
-        const {data} = await api.fetchPosts()
+        const {data} = await fetchPosts()
         //console.log(data)
         dispatch({type : 'FETCH_ALL' , payload : data})
-
-    } catch (error) {
-        console.log(error.message)
-    }
-}
-
-export const createPost = (post) => async(dispatch) => {
-    try {
-        
-        const {data} = await api.createPost(post)
-        dispatch({type : 'CREATE' , payload : data})
 
     } catch (error) {
         console.log(error)
     }
 }
 
-export const updatePost = (id , post ) => async (dispatch) => {
+export const createPostAction = (post) => async(dispatch) => {
     try {
 
-        const {data} = await api.updatePost(id , post)
+        const response = createPost(post)
+        dispatch({type : 'CREATE' , payload : response.data})
+        const {data} = await fetchPosts()
+        //console.log(data)
+        dispatch({type : 'FETCH_ALL' , payload : data})
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const updatePostAction = (id , post ) => async (dispatch) => {
+    try {
+
+        const {data} = await updatePost(id , post)
         dispatch({type : 'UPDATE' , payload: data})
         
     } catch (error) {
@@ -37,12 +41,13 @@ export const updatePost = (id , post ) => async (dispatch) => {
 
 }
 
-export const deletePost = (id) => async(dispatch) => {
+export const deletePostAction = (id) => async(dispatch) => {
     try {
-
-        await api.deletePost(id)
-        dispatch({type : 'DELETE' , payload : id})
         
+        await deletePost(id)
+        dispatch({type : 'DELETE' , payload : id})
+        const response = await fetchPosts()
+        console.log(response , 'response')
     } catch (error) {
         console.log(error)
     }

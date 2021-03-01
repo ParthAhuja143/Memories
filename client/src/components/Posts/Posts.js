@@ -13,6 +13,7 @@ const Posts = ({setCurrentID}) => {
     return (
         !posts.length ?(<h1 style = {{color : 'white', fontFamily : 'sans-serif'}}> No Memories :( </h1>): (
             <Grid className = {classes.mainContainer} container alignItems = 'stretch' spacing = {3}>
+                
               {posts.map((post) => (
                   <Grid key = {post._id} xs = {12} sm = {6} item>
                       <Post post = {post} setCurrentID = {setCurrentID}/>

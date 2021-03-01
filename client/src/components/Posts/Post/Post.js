@@ -1,12 +1,11 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core'
 import React from 'react'
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt'
 import DeleteIcon from '@material-ui/icons/Delete'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import useStyles from './styles.js'
 import moment from 'moment'
 import { useDispatch } from 'react-redux'
-import { deletePost, getPosts } from '../../../actions/posts.js'
+import { deletePostAction} from '../../../actions/posts.js'
 
 const Post = ({post ,setCurrentID}) => {
 
@@ -34,7 +33,7 @@ const Post = ({post ,setCurrentID}) => {
            </CardContent>
            <CardActions className = {classes.cardActions}>
                
-               <Button size = 'small' color = 'primary' onClick = {() => {dispatch(deletePost(post._id)); window.location.reload()}}>
+               <Button size = 'small' color = 'primary' onClick = {() => dispatch(deletePostAction(post._id))}>
                    <DeleteIcon fontSize = 'small' />
                    Delete
                </Button>
